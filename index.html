@@ -69,29 +69,20 @@
         }
         .financial-overview {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-bottom: 30px;
         }
         .financial-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
             color: white;
             padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(66, 153, 225, 0.3);
             transition: transform 0.3s ease;
         }
         .financial-card:hover {
             transform: translateY(-5px);
-        }
-        .financial-card.revenue {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-        }
-        .financial-card.accrual {
-            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
-        }
-        .financial-card.bill {
-            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
         }
         .financial-label {
             font-size: 12px;
@@ -208,84 +199,87 @@
             color: #4a5568;
             font-weight: 700;
         }
-        /* Status Overview - New Design */
-        .status-overview-wrapper {
+        /* Monthly Billed Revenue Chart */
+        .bar-chart-wrapper {
             background: white;
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
         }
-        .status-overview-header {
+        .bar-chart-container {
             display: flex;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 700;
-            color: #4a5568;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 180px;
+            gap: 4px;
+            margin-top: 15px;
+            padding: 5px 3px;
             border-bottom: 2px solid #e2e8f0;
+            position: relative;
         }
-        .status-overview-header::before {
-            content: '📊';
-            margin-right: 8px;
-        }
-        .status-overview {
+        .bar-item {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-        }
-        .status-row {
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 12px 15px;
-            background: #f7fafc;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            gap: 5px;
+            position: relative;
         }
-        .status-row:hover {
-            background: #edf2f7;
-            transform: translateX(3px);
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #4299e1 0%, #3182ce 100%);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+            animation: growBar 1s ease-out forwards;
         }
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        @keyframes growBar {
+            from {
+                transform: scaleY(0);
+                transform-origin: bottom;
+            }
+            to {
+                transform: scaleY(1);
+                transform-origin: bottom;
+            }
         }
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            flex-shrink: 0;
+        .bar:hover {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
         }
-        .status-dot.green {
-            background: #48bb78;
-        }
-        .status-dot.yellow {
-            background: #ecc94b;
-        }
-        .status-dot.red {
-            background: #fc8181;
-        }
-        .status-text {
-            font-size: 13px;
-            color: #2d3748;
-            font-weight: 600;
-        }
-        .status-count {
-            font-size: 13px;
+        .bar-value {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 12px;
+            color: #2d3748;
+            white-space: nowrap;
             background: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            opacity: 0;
+            animation: fadeInValue 0.5s ease-out 0.8s forwards;
         }
-        .status-count.green {
-            color: #38a169;
+        @keyframes fadeInValue {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-3px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
-        .status-count.yellow {
-            color: #d69e2e;
-        }
-        .status-count.red {
-            color: #e53e3e;
+        .bar-label {
+            font-size: 9px;
+            color: #718096;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 3px;
         }
         /* Cards Section */
         .revenue-cards {
@@ -516,7 +510,7 @@
                 grid-template-columns: 1fr;
             }
             .financial-overview {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         @media (max-width: 768px) {
@@ -578,19 +572,23 @@
             </div>
         </div>
 
-        <!-- Section 3: Financial Overview (3 Cards) -->
+        <!-- Section 3: Financial Overview (4 Cards - All Blue) -->
         <div class="financial-overview">
-            <div class="financial-card revenue">
+            <div class="financial-card">
                 <div class="financial-label">Total Revenue</div>
                 <div class="financial-value">$500,000</div>
             </div>
-            <div class="financial-card accrual">
-                <div class="financial-label">Accrual Revenue</div>
+            <div class="financial-card">
+                <div class="financial-label">Recognized Revenue</div>
+                <div class="financial-value">$120,000</div>
+            </div>
+            <div class="financial-card">
+                <div class="financial-label">Billed Revenue</div>
                 <div class="financial-value">$100,000</div>
             </div>
-            <div class="financial-card bill">
-                <div class="financial-label">Bill Revenue</div>
-                <div class="financial-value">$100,000</div>
+            <div class="financial-card">
+                <div class="financial-label">Accrual Revenue</div>
+                <div class="financial-value">$20,000</div>
             </div>
         </div>
 
@@ -637,31 +635,82 @@
                     </div>
                 </div>
 
-                <!-- Right: Overall Status -->
+                <!-- Right: Monthly Billed Revenue Bar Chart -->
                 <div class="chart-wrapper">
-                    <div class="chart-title">📊 Overall Status</div>
-                    <div class="status-overview-wrapper">
-                        <div class="status-overview">
-                            <div class="status-row">
-                                <div class="status-left">
-                                    <span class="status-dot green"></span>
-                                    <span class="status-text">Excellent (Under Budget/Ready):</span>
+                    <div class="chart-title">📊 Monthly Billed Revenue</div>
+                    <div class="bar-chart-wrapper">
+                        <div class="bar-chart-container">
+                            <div class="bar-item">
+                                <div class="bar" style="height: 75px;">
+                                    <div class="bar-value">$15K</div>
                                 </div>
-                                <span class="status-count green">5 Items</span>
+                                <div class="bar-label">Jan</div>
                             </div>
-                            <div class="status-row">
-                                <div class="status-left">
-                                    <span class="status-dot yellow"></span>
-                                    <span class="status-text">Caution (Near Limit):</span>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 90px;">
+                                    <div class="bar-value">$18K</div>
                                 </div>
-                                <span class="status-count yellow">0 Items</span>
+                                <div class="bar-label">Feb</div>
                             </div>
-                            <div class="status-row">
-                                <div class="status-left">
-                                    <span class="status-dot red"></span>
-                                    <span class="status-text">Alert (Over Budget):</span>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 60px;">
+                                    <div class="bar-value">$12K</div>
                                 </div>
-                                <span class="status-count red">1 Item</span>
+                                <div class="bar-label">Mar</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 110px;">
+                                    <div class="bar-value">$22K</div>
+                                </div>
+                                <div class="bar-label">Apr</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 80px;">
+                                    <div class="bar-value">$16K</div>
+                                </div>
+                                <div class="bar-label">May</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 140px;">
+                                    <div class="bar-value">$28K</div>
+                                </div>
+                                <div class="bar-label">Jun</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 50px;">
+                                    <div class="bar-value">$10K</div>
+                                </div>
+                                <div class="bar-label">Jul</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 100px;">
+                                    <div class="bar-value">$20K</div>
+                                </div>
+                                <div class="bar-label">Aug</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 120px;">
+                                    <div class="bar-value">$24K</div>
+                                </div>
+                                <div class="bar-label">Sep</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 130px;">
+                                    <div class="bar-value">$26K</div>
+                                </div>
+                                <div class="bar-label">Oct</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 150px;">
+                                    <div class="bar-value">$30K</div>
+                                </div>
+                                <div class="bar-label">Nov</div>
+                            </div>
+                            <div class="bar-item">
+                                <div class="bar" style="height: 175px;">
+                                    <div class="bar-value">$35K</div>
+                                </div>
+                                <div class="bar-label">Dec</div>
                             </div>
                         </div>
                     </div>
@@ -693,11 +742,11 @@
                             <div class="stat-value">$300K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Accrual Revenue</div>
+                            <div class="stat-label">Recognized Revenue</div>
                             <div class="stat-value" style="color: #68d391;">$120K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Bill Revenue</div>
+                            <div class="stat-label">Billed Revenue</div>
                             <div class="stat-value" style="color: #38a169;">$100K</div>
                         </div>
                     </div>
@@ -737,11 +786,11 @@
                             <div class="stat-value">$200K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Accrual Revenue</div>
+                            <div class="stat-label">Recognized Revenue</div>
                             <div class="stat-value" style="color: #718096;">$0</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Bill Revenue</div>
+                            <div class="stat-label">Billed Revenue</div>
                             <div class="stat-value" style="color: #718096;">$0</div>
                         </div>
                     </div>
@@ -773,11 +822,11 @@
                             <th rowspan="2" class="text-right">Original Budget (A)</th>
                             <th rowspan="2" class="text-center">% Cur</th>
                             <th rowspan="2" class="text-right">Current Budget (B)</th>
-                            <th rowspan="2" class="text-right">Accrual Revenue (C)</th>
-                            <th rowspan="2" class="text-center">% Accrual</th>
-                            <th rowspan="2" class="text-right">Bill Revenue (D)</th>
+                            <th rowspan="2" class="text-right">Recognized Revenue (C)</th>
+                            <th rowspan="2" class="text-center">% Recognized</th>
+                            <th rowspan="2" class="text-right">Billed Revenue (D)</th>
                             <th rowspan="2" class="text-center">% Bill</th>
-                            <th rowspan="2" class="text-right">Remain Accrual (E) = (B)-(C)</th>
+                            <th rowspan="2" class="text-right">Remaining Accrual (E) = (B)-(C)</th>
                             <th colspan="4" class="year-header text-center">Revenue by Year</th>
                         </tr>
                         <tr>
