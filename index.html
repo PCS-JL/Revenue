@@ -1,24 +1,9 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-							<style>
-								body {
-									background-color: white; /* Ensure the iframe has a white background */
-								}
-
-								
-							</style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Cost Report - Revenue Summary</title>
+    <title>Project Revenue</title>
     <style>
         * {
             margin: 0;
@@ -429,20 +414,22 @@
             border-radius: 10px;
             overflow: hidden;
             position: relative;
+            display: flex;
         }
-        .progress-fill {
+        .progress-bill {
             height: 100%;
-            background: linear-gradient(90deg, #48bb78 0%, #38a169 100%);
-            border-radius: 10px;
+            background: linear-gradient(90deg, #2f855a 0%, #38a169 100%);
             transition: width 0.8s ease;
-            position: relative;
-            float: left;
+        }
+        .progress-accrual {
+            height: 100%;
+            background: linear-gradient(90deg, #9ae6b4 0%, #68d391 100%);
+            transition: width 0.8s ease;
         }
         .progress-remain {
             height: 100%;
             background: linear-gradient(90deg, #cbd5e0 0%, #a0aec0 100%);
-            border-radius: 10px;
-            float: left;
+            flex: 1;
         }
         /* Table View */
         .table-view {
@@ -559,7 +546,7 @@
     <div class="container">
         <!-- Section 1: Header -->
         <div class="header">
-            <h1>💰 Project Cost Report</h1>
+            <h1>💰 Project Revenue</h1>
             <p class="subtitle">Revenue Page Summary - Period: Dec'25</p>
         </div>
 
@@ -706,22 +693,23 @@
                             <div class="stat-value">$300K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Actual Received</div>
-                            <div class="stat-value" style="color: #38a169;">$100K</div>
+                            <div class="stat-label">Accrual Revenue</div>
+                            <div class="stat-value" style="color: #68d391;">$120K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Remain Receive</div>
-                            <div class="stat-value">$200K</div>
+                            <div class="stat-label">Bill Revenue</div>
+                            <div class="stat-value" style="color: #38a169;">$100K</div>
                         </div>
                     </div>
                     <div class="progress-container">
                         <div class="progress-header">
                             <span class="progress-label">Collection Progress</span>
-                            <span class="progress-percent">Received: 33% | Remain: 67%</span>
+                            <span class="progress-percent">Bill: 33% | Accrual: 40% | Remain: 27%</span>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 33%"></div>
-                            <div class="progress-remain" style="width: 67%"></div>
+                            <div class="progress-bill" style="width: 33%"></div>
+                            <div class="progress-accrual" style="width: 7%"></div>
+                            <div class="progress-remain"></div>
                         </div>
                     </div>
                 </div>
@@ -749,22 +737,23 @@
                             <div class="stat-value">$200K</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Actual Received</div>
+                            <div class="stat-label">Accrual Revenue</div>
                             <div class="stat-value" style="color: #718096;">$0</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-label">Remain Receive</div>
-                            <div class="stat-value">$200K</div>
+                            <div class="stat-label">Bill Revenue</div>
+                            <div class="stat-value" style="color: #718096;">$0</div>
                         </div>
                     </div>
                     <div class="progress-container">
                         <div class="progress-header">
                             <span class="progress-label">Collection Progress</span>
-                            <span class="progress-percent">Received: 0% | Remain: 100%</span>
+                            <span class="progress-percent">Bill: 0% | Accrual: 0% | Remain: 100%</span>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%"></div>
-                            <div class="progress-remain" style="width: 100%"></div>
+                            <div class="progress-bill" style="width: 0%"></div>
+                            <div class="progress-accrual" style="width: 0%"></div>
+                            <div class="progress-remain"></div>
                         </div>
                     </div>
                 </div>
@@ -784,9 +773,11 @@
                             <th rowspan="2" class="text-right">Original Budget (A)</th>
                             <th rowspan="2" class="text-center">% Cur</th>
                             <th rowspan="2" class="text-right">Current Budget (B)</th>
-                            <th rowspan="2" class="text-right">Actual Received (C)</th>
-                            <th rowspan="2" class="text-center">% Received</th>
-                            <th rowspan="2" class="text-right">Remain Receive (D) = (B)-(C)</th>
+                            <th rowspan="2" class="text-right">Accrual Revenue (C)</th>
+                            <th rowspan="2" class="text-center">% Accrual</th>
+                            <th rowspan="2" class="text-right">Bill Revenue (D)</th>
+                            <th rowspan="2" class="text-center">% Bill</th>
+                            <th rowspan="2" class="text-right">Remain Accrual (E) = (B)-(C)</th>
                             <th colspan="4" class="year-header text-center">Revenue by Year</th>
                         </tr>
                         <tr>
@@ -804,6 +795,8 @@
                             <td class="text-right"><strong>$ 300,000</strong></td>
                             <td class="text-center color-green"><strong>60%</strong></td>
                             <td class="text-right"><strong>$ 300,000</strong></td>
+                            <td class="text-right color-green"><strong>$ 100,000</strong></td>
+                            <td class="text-center color-green"><strong>33%</strong></td>
                             <td class="text-right color-green"><strong>$ 100,000</strong></td>
                             <td class="text-center color-green"><strong>33%</strong></td>
                             <td class="text-right"><strong>$ 200,000</strong></td>
@@ -826,10 +819,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42211</td>
                             <td>Lump Sum Charge</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -856,10 +853,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42410</td>
                             <td>Mob/Demob Vessel / Equipment</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -886,10 +887,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42414</td>
                             <td>Mob/Demob Personnel</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -916,10 +921,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42512</td>
                             <td>Communication Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -946,10 +955,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42514</td>
                             <td>Bunker Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -976,10 +989,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42517</td>
                             <td>Misc. Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1006,10 +1023,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42611</td>
                             <td>Communication Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1036,10 +1057,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42613</td>
                             <td>Bunker Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1066,10 +1091,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42615</td>
                             <td>Misc. Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1089,6 +1118,8 @@
                             <td class="text-right"><strong>$ 200,000</strong></td>
                             <td class="text-center color-orange"><strong>40%</strong></td>
                             <td class="text-right"><strong>$ 200,000</strong></td>
+                            <td class="text-right color-red"><strong>$ -</strong></td>
+                            <td class="text-center color-red"><strong>0%</strong></td>
                             <td class="text-right color-red"><strong>$ -</strong></td>
                             <td class="text-center color-red"><strong>0%</strong></td>
                             <td class="text-right"><strong>$ 200,000</strong></td>
@@ -1111,10 +1142,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42211</td>
                             <td>Lump Sum Charge</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1141,10 +1176,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42410</td>
                             <td>Mob/Demob Vessel / Equipment</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1171,10 +1210,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42414</td>
                             <td>Mob/Demob Personnel</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1201,10 +1244,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42512</td>
                             <td>Communication Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1231,10 +1278,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42514</td>
                             <td>Bunker Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1261,10 +1312,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42517</td>
                             <td>Misc. Cost Plus</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1291,10 +1346,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42611</td>
                             <td>Communication Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1321,10 +1380,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42613</td>
                             <td>Bunker Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1351,10 +1414,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>42615</td>
                             <td>Misc. Lump Sum</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -1375,6 +1442,8 @@
                             <td class="text-right"><strong>$ 500,000</strong></td>
                             <td class="text-right color-green"><strong>$ 100,000</strong></td>
                             <td class="text-center color-green"><strong>20%</strong></td>
+                            <td class="text-right color-green"><strong>$ 100,000</strong></td>
+                            <td class="text-center color-green"><strong>20%</strong></td>
                             <td class="text-right"><strong>$ 400,000</strong></td>
                             <td class="text-right color-green"><strong>$ 100,000</strong></td>
                             <td class="text-right"><strong>$ -</strong></td>
@@ -1383,7 +1452,7 @@
                         </tr>
                         <tr class="cumulative-row">
                             <td colspan="2"><strong>Cumulative Received</strong></td>
-                            <td colspan="7"></td>
+                            <td colspan="9"></td>
                             <td class="text-right color-green"><strong>$ 100,000</strong></td>
                             <td class="text-right"><strong>$ 100,000</strong></td>
                             <td class="text-right"><strong>$ 100,000</strong></td>
@@ -1413,7 +1482,7 @@
                 
                 // Animate progress bars
                 setTimeout(() => {
-                    document.querySelectorAll('.progress-fill, .progress-remain').forEach(bar => {
+                    document.querySelectorAll('.progress-bill, .progress-accrual').forEach(bar => {
                         const width = bar.style.width;
                         bar.style.width = '0%';
                         setTimeout(() => {
@@ -1429,7 +1498,7 @@
 
         // Animate progress bars on load
         window.addEventListener('load', function() {
-            const progressBars = document.querySelectorAll('.progress-fill, .progress-remain');
+            const progressBars = document.querySelectorAll('.progress-bill, .progress-accrual');
             progressBars.forEach(bar => {
                 const width = bar.style.width;
                 bar.style.width = '0%';
@@ -1450,10 +1519,3 @@
     </script>
 </body>
 </html>
-
-							<script>
-                            	
-							</script>
-                        </body>
-                        </html>
-                    
